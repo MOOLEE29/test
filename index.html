@@ -7,28 +7,68 @@
         body {
             font-family: 'Noto Sans TC', sans-serif;
             margin: 0;
-            background: #ffffff;
+            background: #ffffff;  /* 背景白色 */
             display: flex;
             justify-content: center;
             align-items: flex-start;
             width: 100%;
-            padding-top: 10px;
+            padding-top: 10px;  /* 增加上下留白 */
         }
         .container {
-            width: 90%;
-            max-width: 800px;
-            padding: 20px;
-            margin: 20px auto;
+            width: 90%; /* 調整為相對寬度，適合大部分設備 */
+            max-width: 800px; /* 桌面設備的最大寬度 */
+            padding: 20px; /* 內邊距稍作調整 */
+            margin: 20px auto; /* 水平置中 */
             background-color: white;
-            border-radius: 16px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            border: 1px solid #f0f0f0;
+            border-radius: 16px; /* 圓角 */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* 陰影效果 */
+            border: 1px solid #f0f0f0; /* 邊框 */
+        }
+        /* 手機螢幕調整 */
+        @media (max-width: 768px) {
+            .container {
+                width: 97%; /* 手機螢幕更緊湊的設計 */
+                max-width: 100%; /* 移除最大寬度限制 */
+                padding: 15px; /* 減少邊距 */
+            }
         }
         h2 {
             text-align: center;
             color: #333;
             font-size: 20px;
-            margin-top: 0;
+            margin-top: 0; /* 讓標題不再擠壓 */
+        }
+        .info-toggle {
+            background-color: #fffae5;
+            padding: 8px 8px; /* 減小padding，避免太大 */
+            border-radius: 8px;
+            border: 1px solid #ffd54f;
+            cursor: pointer;
+            text-align: center;
+            color: #d35400;
+            margin-bottom: 6px;
+        }
+        .filter-box {
+            background-color: rgba(255, 255, 255, 0.8);  /* 加入透明感 */
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.05);  /* 增加內部陰影 */
+            margin-bottom: 15px;
+        }
+        .info-box {
+            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: #fff8d1;
+            border: 1px solid #ffca28;
+        }
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .form-group {
+            width: calc(50% - 10px);
         }
         label {
             display: block;
@@ -36,58 +76,140 @@
             font-size: 14px;
             font-weight: bold;
         }
+        .highlight-box {
+            background-color: #e8f5e9;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #4CAF50;
+            display: none;
+            margin-top: 10px;
+        }
         select, input {
             width: 100%;
             box-sizing: border-box;
-            padding: 8px;
+            padding: 8px; /* 縮小 padding 方便操作 */
             margin-bottom: 10px;
             border: 1px solid #ddd;
-            border-radius: 12px;
-            font-size: 16px;
+            border-radius: 12px; /* 調整圓角 */
+            font-size: 16px; /* 調整字體讓操作更輕鬆 */
         }
+        .suggestions-wrapper {
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-top: 10px;
+            border-radius: 8px;
+            background-color: rgba(240, 240, 240, 0.9);  /* 建議結果區帶灰色背景 */
+            display: flex;
+            gap: 10px;
+            padding: 15px 15px;  /* 增加左右 padding，避免切邊 */
+        }
+        .suggestion-item {
+            display: inline-block;
+            width: 200px;  /* 調小寬度，避免太寬 */
+            background-color: white;
+            border-radius: 8px;
+            padding: 5px;  /* 減少內部 padding */
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            font-size: 14px;  /* 調整文字大小 */
+            line-height: 1.4;  /* 增加行間距 */
+            transition: all 0.3s ease;
+        }
+        .suggestion-item.active {
+            border: 2px solid #00c300;
+            box-shadow: 0 4px 12px rgba(0, 195, 0, 0.3);
+            transform: scale(1.05);
+        }
+        .suggestion-item:hover {
+            background-color: #f5f5f5;  /* 滑鼠移入背景變淺 */
+        }
+        .no-results {
+            color: #757575;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+        .line-btn, .copy-btn {
+            margin-right: 10px;  /* 讓按鈕之間有間距 */
+            padding: 10px 16px;
+            background-color: #00c300;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+        
+        .copy-btn {
+            background-color: #007bff;  /* 藍色按鈕 */
+        }
+        
+        .copy-btn:hover {
+            background-color: #0056b3;  /* 藍色 hover */
+        } 
+        .line-btn:hover {
+            background-color: #009a00;  /* 當滑鼠移上去時顏色變深 */
+        }
+        .line-btn:active {
+            background-color: #007f00;
+            box-shadow: none; /* 點擊時取消陰影 */
+        }        
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Carchi 咖起 路線搜尋器🔍</h2>
+        <!-- 提示訊息區 -->
+        <div class="info-toggle" onclick="toggleInfoBox()">找不到您的航班嗎？點擊查看提示！</div>
+        <div class="info-box" id="infoBox">
+            🚨<b>航班路線提醒</b><br>
+            接機服務僅限<strong>「晚上八點後」</strong>航班<br>
+            送機服務僅限<strong>「早上十點前」</strong>航班<br>
+            若找不到您想要的航班，歡迎使用 <a href="https://carchitw.com/wish-form/" target="_blank" rel="noopener noreferrer">路線許願池</a> 功能！
+        </div>
+        <!-- 篩選器區 -->
         
-        <!-- 新增的詢問問題 -->
-        <div class="form-group">
-            <label for="registerDate">登記日期</label>
-            <input type="date" id="registerDate">
-        </div>
-        <div class="form-group">
-            <label for="registerPeople">登記人數</label>
-            <input type="number" id="registerPeople" min="1">
-        </div>
-        <div class="form-group">
-            <label for="luggage">攜帶行李箱數</label>
-            <select id="luggage">
-                <option value="20">20吋內</option>
-                <option value="21-26">21~26吋</option>
-                <option value="27+">27吋以上</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="groupIntent">團主意願</label>
-            <select id="groupIntent">
-                <option value="可以">可以</option>
-                <option value="視情況而定">視情況而定</option>
-                <option value="不方便">不方便</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="metroStation">地鐵站</label>
-            <input type="text" id="metroStation" placeholder="請輸入地鐵站名稱">
-        </div>
-        <div class="form-group">
-            <label for="tripNotes">行程備注</label>
-            <input type="text" id="tripNotes" placeholder="請輸入備注">
-        </div>
-        
-        <!-- 原有的 HTML 內容 -->
+
         <div class="filter-box">
             <div class="form-container">
+                <!-- 新增的詢問問題 -->
+                <div class="form-group">
+                    <label for="registerDate">登記日期</label>
+                    <input type="date" id="registerDate">
+                </div>
+                <div class="form-group">
+                    <label for="registerPeople">登記人數</label>
+                    <input type="number" id="registerPeople" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="luggage">攜帶行李箱數</label>
+                    <select id="luggage">
+                        <option value="20">20吋內</option>
+                        <option value="21-26">21~26吋</option>
+                        <option value="27+">27吋以上</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="groupIntent">團主意願</label>
+                    <select id="groupIntent">
+                        <option value="可以">可以</option>
+                        <option value="視情況而定">視情況而定</option>
+                        <option value="不方便">不方便</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="metroStation">地鐵站</label>
+                    <input type="text" id="metroStation" placeholder="請輸入地鐵站名稱">
+                </div>
+                <div class="form-group">
+                    <label for="tripNotes">行程備注</label>
+                    <input type="text" id="tripNotes" placeholder="請輸入備注">
+                </div>
                 <div class="form-group">
                     <label for="serviceType">選擇服務類型</label>
                     <select id="serviceType">
@@ -129,7 +251,7 @@
                 </div>
             </div>
         </div>
-    </div>
+        
         <!-- 建議結果區 -->
         <div id="suggestionsWrapper" class="suggestions-wrapper"></div>
         <p id="noResults" class="no-results">目前無符合條件的路線。</p>
@@ -140,6 +262,7 @@
     <script>
         let routes = [];
         let airlinesSet = new Set();
+    
         fetch('All_Routenew2.json')
             .then(response => response.json())
             .then(data => {
@@ -364,8 +487,8 @@
         }
 
         //function sendToLine(route) {
-            // alert(`路線 ${route} 已帶回 LINE Bot`);
-        // }
+           // alert(`路線 ${route} 已帶回 LINE Bot`);
+       // }
 
         document.querySelectorAll("input, select").forEach(input => {
             input.addEventListener("input", () => {
@@ -376,5 +499,3 @@
     </script>
 </body>
 </html>
-
-
